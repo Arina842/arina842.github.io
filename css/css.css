@@ -1,0 +1,44 @@
+/* Переменные */
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --accent: #e74c3c;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+    --gray: #95a5a6;
+    --bg-light: #f8f9fa;
+    --bg-dark: #1a252f;
+    --transition: all 0.3s ease;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+}
+
+/* ... остальные стили из предыдущего кода ... */
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    /* ... */
+}
+
+@media (max-width: 768px) {
+    /* ... */
+}
+
+@media (max-width: 576px) {
+    /* ... */
+}
