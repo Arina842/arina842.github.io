@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Гаврилович Арина Сергеевна - Инженер-конструктор</title>
+    <title>Гаврилович Арина - Инженер-конструктор</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* CSS стили будут в отдельном файле в финальной реализации */
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
@@ -1138,7 +1139,7 @@
                 </div>
                 
                 <div class="contact-form">
-                    <form>
+                    <form id="contact-form">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Ваше имя" required>
                         </div>
@@ -1239,6 +1240,13 @@
                     });
                 }
             });
+        });
+        
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Сообщение отправлено! Я свяжусь с вами в ближайшее время.');
+            this.reset();
         });
     </script>
 </body>
