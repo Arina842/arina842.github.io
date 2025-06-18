@@ -557,24 +557,30 @@
             transform: translateY(-3px);
         }
         
-        /* Contact Section */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 50px;
+         .contact-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             max-width: 800px;
             margin: 0 auto;
         }
         
         .contact-info {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
+            width: 100%;
         }
         
         .contact-item {
             display: flex;
             gap: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            
         }
         
         .contact-icon {
@@ -937,8 +943,8 @@
                         <span class="prompt">arina@portfolio:~$</span> <span class="command">whoami</span>
                         <span class="output">Coffe Photo Music Festivals Lilac</span>
                         <br>
-                        <span class="prompt">aria@portfolio:~$</span> <span class="command">skills --show</span>
-                        <span class="output">Python NumPy Pandas Plotlyb SciPy Markdown HTML5 CSS3 Qt Postgres mysql</span>
+                        <span class="prompt">arina@portfolio:~$</span> <span class="command">skills --show</span>
+                        <span class="output">Python NumPy Pandas Plotlyb SciPy Markdown HTML5 CSS3 PYQt Postgres MYSQL</span>
                     </div>
                 </div>
             </div>
@@ -1004,7 +1010,7 @@
             <h2 class="section-title">Профессиональные навыки</h2>
             <div class="skills-container">
                 <div class="skills-category">
-                    <h3><i class="fas fa-laptop-code"></i>Инженерия</h3>
+                    <h3><i class="fas fa-laptop-house"></i>Инженерия</h3>
                     <div class="skill-item">
                              <div class="skill-header">
                                 <span class="skill-name">CAD/CAM системы</span>
@@ -1040,7 +1046,7 @@
                 </div>
                 
                 <div class="skills-category">
-                    <h3><i class="fas fa-server"></i> Разработка</h3>
+                    <h3><i class="fas fa-laptop-code"></i> Разработка</h3>
                     <div class="skill-item">
                         <div class="skill-header">
                             <span class="skill-name">HTML5/CSS3</span>
@@ -1203,21 +1209,21 @@
                     
                     <div class="contact-item">
                         <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>Телефон</h4>
-                            <a href="tel:+79851648494">+7 (985) 164-84-94</a>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="contact-text">
                             <h4>Email</h4>
                             <a href="mailto:arina1416@yandex.ru">arina1416@yandex.ru</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Телефон</h4>
+                            <a href="tel:+79851648494">+7 (985) 164-84-94</a>
                         </div>
                     </div>
                     
@@ -1320,7 +1326,7 @@
                     }, 300);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.01 });
         
         document.querySelectorAll('.skill-item').forEach(item => {
             observer.observe(item);
