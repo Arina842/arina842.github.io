@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Гаврилович Арина - Инженер-конструктор</title>
+    <title>Гаврилович Арина - Инженер-программист</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS стили будут в отдельном файле в финальной реализации */
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
@@ -560,13 +559,15 @@
         /* Contact Section */
         .contact-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 50px;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .contact-info {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
         
@@ -600,30 +601,6 @@
         .contact-text p, .contact-text a {
             color: #555;
             margin: 0;
-        }
-        
-        .contact-form .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.2);
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
         }
         
         /* Footer */
@@ -718,8 +695,7 @@
             }
             
             .about-content,
-            .skills-container,
-            .contact-container {
+            .skills-container {
                 grid-template-columns: 1fr;
             }
             
@@ -742,6 +718,10 @@
             }
 
             .education-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
                 grid-template-columns: 1fr;
             }
         }
@@ -825,6 +805,89 @@
             .education-container {
                 grid-template-columns: 1fr;
             }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Animation for skills */
+        .skill-progress {
+            animation: progress-animation 1.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes progress-animation {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Terminal effect */
+        .terminal-effect {
+            background: #1e1e1e;
+            color: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            margin-top: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+            margin-right: 10px;
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-dot.red { background: #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #27c93f; }
+        
+        .terminal-title {
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        .terminal-content {
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        
+        .terminal-content .prompt {
+            color: #4cd137;
+        }
+        
+        .terminal-content .command {
+            color: #3498db;
+        }
+        
+        .terminal-content .output {
+            color: #f0f0f0;
+            display: block;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -852,15 +915,33 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">Гаврилович Арина Сергеевна</h1>
-                <h2 class="hero-subtitle">Инженер-конструктор</h2>
-                <p class="hero-text">Специалист по проектированию и конструированию изделий из композиционных материалов. Опыт работы в аэрокосмической промышленности и тяжелом машиностроении.</p>
+                <h2 class="hero-subtitle">Инженер-программист</h2>
+                <p class="hero-text">Сочетаю опыт работы в аэрокосмической промышленности и тяжелом машиностроении с опытом работы IT отдела в геологической лаборатории</p>
                 <div class="hero-btns">
                     <a href="#contact" class="btn btn-primary">Связаться со мной</a>
                     <a href="#experience" class="btn btn-outline">Мой опыт</a>
                 </div>
+                
+                <div class="terminal-effect">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                        </div>
+                        <div class="terminal-title">Terminal - ArinaGavrilovich</div>
+                    </div>
+                    <div class="terminal-content">
+                        <span class="prompt">arina@portfolio:~$</span> <span class="command">whoami</span>
+                        <span class="output">Coffe Photo Music Festivals Lilac</span>
+                        <br>
+                        <span class="prompt">aria@portfolio:~$</span> <span class="command">skills --show</span>
+                        <span class="output">Python NumPy Pandas Plotlyb SciPy Markdown HTML5 CSS3 Qt Postgres mysql</span>
+                    </div>
+                </div>
             </div>
             <div class="hero-img">
-                <img src="https://images.unsplash.com/photo-1581094794329-aa3c5174c2a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Инженер-конструктор">
+                <img src="draw-a-minimalistic-picture-of-a-woman-with-brown-.png" alt="Гаврилович Арина Сергеевна">
             </div>
         </div>
     </section>
@@ -871,12 +952,14 @@
             <h2 class="section-title">Обо мне</h2>
             <div class="about-content">
                 <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Гаврилович Арина Сергеевна">
+                    <img src="draw-a-minimalistic-picture-of-a-woman-with-brown-.png" alt="Гаврилович Арина Сергеевна">
                 </div>
                 <div class="about-text">
-                    <h3>Инженер-конструктор из Москвы</h3>
-                    <p>Специализируюсь на проектировании деталей и узлов, 3D моделировании, разработке технической документации и расчетах надежности. Имею опыт работы в аэрокосмической промышленности и тяжелом машиностроении.</p>
-                    <p>Мой подход сочетает в себе техническую точность, внимание к деталям и понимание производственных процессов. Постоянно совершенствую свои навыки в области CAD/CAM систем и инженерных расчетов.</p>
+                    <h3>Разработчик из Москвы</h3>
+                    <p>Специализируюсь на проектировании деталей, 3D моделировании, разработке технической документации и расчетах надежности. Имею опыт работы в аэрокосмической промышленности и тяжелом машиностроении.</p>
+                    <p>Мой путь в IT начался с увлечения решением логических задач и создания чего-то нового. Я переквалифицировалась из инженера в программиста, потому что увидела в этом возможность постоянно развиваться и создавать то, что меняет мир.</p>
+                    <p>Я верю, что лучший код — это не просто работающий код, а понятный, поддерживаемый и масштабируемый. В своей работе уделяю особое внимание архитектуре приложений, качеству кода и тестированию.</p>
+                    <p>В свободное время изучаю новые технологии и совершенствую английский язык.</p>
                     
                     <div class="about-info">
                         <div class="info-item">
@@ -890,21 +973,21 @@
                             <i class="fas fa-language"></i>
                             <div class="info-text">
                                 <h4>Языки</h4>
-                                <p>Русский (родной), Английский (B2)</p>
+                                <p>Русский (родной), Английский (B1)</p>
                             </div>
                         </div>
                         <div class="info-item">
-                            <i class="fas fa-briefcase"></i>
+                            <i class="fas fa-laptop-code"></i>
                             <div class="info-text">
-                                <h4>Статус</h4>
-                                <p>Готова к командировкам</p>
+                                <h4>Специализация</h4>
+                                <p>Инженер-программист</p>
                             </div>
                         </div>
                         <div class="info-item">
-                            <i class="fas fa-car"></i>
+                            <i class="fas fa-code"></i>
                             <div class="info-text">
-                                <h4>Водительские права</h4>
-                                <p>Категория B</p>
+                                <h4>Опыт работы</h4>
+                                <p>4 года</p>
                             </div>
                         </div>
                     </div>
@@ -919,81 +1002,73 @@
             <h2 class="section-title">Профессиональные навыки</h2>
             <div class="skills-container">
                 <div class="skills-category">
-                    <h3><i class="fas fa-cogs"></i> CAD/CAM системы</h3>
+                    <h3><i class="fas fa-laptop-code"></i>Инженерия</h3>
                     <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">SolidWorks</span>
-                            <span class="skill-percentage">95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Siemens NX</span>
-                            <span class="skill-percentage">90%</span>
+                     <div class="skill-header">
+                            <span class="skill-name">CAD/CAM системы</span>
+                            <span class="skill-percentage">70%</span>
                         </div>
                         <div class="skill-bar">
                             <div class="skill-progress" style="width: 90%"></div>
                         </div>
-                    </div>
-                    <div class="skill-item">
                         <div class="skill-header">
-                            <span class="skill-name">Autodesk Inventor</span>
-                            <span class="skill-percentage">88%</span>
+                            <span class="skill-name">ГОСТ/СТП/ОСТ</span>
+                            <span class="skill-percentage">80%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 88%"></div>
+                            <div class="skill-progress" style="width: 90%"></div>
                         </div>
+                         <div class="skill-header">
+                            <span class="skill-name">НИОКР/ОКР</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                     </div>
+        
+ 
+                    
+                </div>
+                
+                <div class="skills-category">
+                    <h3><i class="fas fa-server"></i> Разработка</h3>
+                    <div class="skill-item">
+                
+                        <div class="skill-header">
+                            <span class="skill-name">HTML5/CSS3</span>
+                            <span class="skill-percentage">60%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+        
                     </div>
                     <div class="skill-item">
                         <div class="skill-header">
-                            <span class="skill-name">Компас-3D</span>
-                            <span class="skill-percentage">85%</span>
+                            <span class="skill-name">Python</span>
+                            <span class="skill-percentage">70%</span>
                         </div>
                         <div class="skill-bar">
                             <div class="skill-progress" style="width: 85%"></div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="skills-category">
-                    <h3><i class="fas fa-calculator"></i> Инженерные расчеты</h3>
                     <div class="skill-item">
                         <div class="skill-header">
-                            <span class="skill-name">Ansys</span>
-                            <span class="skill-percentage">90%</span>
+                            <span class="skill-name">Git/GitHub</span>
+                            <span class="skill-percentage">70%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
+                            <div class="skill-progress" style="width: 87%"></div>
                         </div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-header">
                             <span class="skill-name">Mathcad</span>
-                            <span class="skill-percentage">85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Femap</span>
                             <span class="skill-percentage">80%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-header">
-                            <span class="skill-name">Расчет надежности</span>
-                            <span class="skill-percentage">92%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 92%"></div>
+                            <div class="skill-progress" style="width: 83%"></div>
                         </div>
                     </div>
                 </div>
@@ -1001,22 +1076,29 @@
             
             <h3 style="margin-top: 50px; text-align: center; color: var(--secondary);">Дополнительные навыки</h3>
             <div class="skills-grid">
+                <div class="skill-tag">SolidWorks</div>
+     
+                <div class="skill-tag">Siemens NX</div>
+                <div class="skill-tag">Autodesk Inventor</div>
+                <div class="skill-tag">Agile/Scrum</div>
+                <div class="skill-tag">Компас-3D</div>
+                <div class="skill-tag">Ansys</div>
+                <div class="skill-tag">Femap</div>
+                <div class="skill-tag">Расчет надежности</div>
                 <div class="skill-tag">T-FLEX DOCs</div>
-                <div class="skill-tag">Rhinoceros 3D</div>
                 <div class="skill-tag">AutoCAD</div>
-                <div class="skill-tag">Digimat</div>
+           
                 <div class="skill-tag">1C: Документооборот</div>
                 <div class="skill-tag">Разработка ТЗ</div>
                 <div class="skill-tag">3D моделирование</div>
-                <div class="skill-tag">ГОСТ/СТП/ОСТ</div>
-                <div class="skill-tag">НИОКР/ОКР</div>
-                <div class="skill-tag">CTTI</div>
+            
+         
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="experience">
+   <section id="experience" class="experience">
         <div class="container">
             <h2 class="section-title">Опыт работы</h2>
             <div class="timeline">
@@ -1129,31 +1211,13 @@
                     
                     <div class="contact-item">
                         <div class="contact-icon">
-                            <i class="fas fa-file-alt"></i>
+                            <i class="fab fa-github"></i>
                         </div>
                         <div class="contact-text">
-                            <h4>Резюме</h4>
-                            <p>Обновлено 2 декабря 2024</p>
+                            <h4>GitHub</h4>
+                            <a href="https://github.com/Arina842" target="_blank">github.com/Arina842</a>
                         </div>
                     </div>
-                </div>
-                
-                <div class="contact-form">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Ваше имя" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Ваш Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Тема">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Ваше сообщение" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Отправить сообщение</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -1165,11 +1229,11 @@
             <div class="footer-container">
                 <div class="footer-col">
                     <h3>Гаврилович Арина</h3>
-                    <p>Инженер-конструктор с опытом работы в аэрокосмической промышленности и тяжелом машиностроении. Специалист по CAD/CAM системам и инженерным расчетам.</p>
+                    <p>Инженер-программист</p>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                        <a href="https://github.com/arinagavrilovich" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://t.me/arinagavrilovich" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="https://linkedin.com/in/arinagavrilovich" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
@@ -1185,17 +1249,7 @@
                     </ul>
                 </div>
                 
-                <div class="footer-col">
-                    <h3>Специализация</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Инженер-конструктор</a></li>
-                        <li><a href="#">Инженер-проектировщик</a></li>
-                        <li><a href="#">3D моделирование</a></li>
-                        <li><a href="#">Расчет надежности</a></li>
-                        <li><a href="#">Разработка ТЗ</a></li>
-                        <li><a href="#">Анализ МКЭ</a></li>
-                    </ul>
-                </div>
+                
             </div>
             <div class="copyright">
                 <p>&copy; 2025 Гаврилович Арина Сергеевна. Все права защищены.</p>
@@ -1242,11 +1296,22 @@
             });
         });
         
-        // Form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Сообщение отправлено! Я свяжусь с вами в ближайшее время.');
-            this.reset();
+        // Animation for skill bars when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillProgress = entry.target.querySelector('.skill-progress');
+                    const width = skillProgress.style.width;
+                    skillProgress.style.width = '0';
+                    setTimeout(() => {
+                        skillProgress.style.width = width;
+                    }, 300);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.skill-item').forEach(item => {
+            observer.observe(item);
         });
     </script>
 </body>
