@@ -1,0 +1,76 @@
+:root {
+    /* Переменные */
+}
+
+* {
+    /* Сброс стилей */
+}
+
+body {
+    /* Основные стили */
+}
+
+/* Секции и общие компоненты */
+.container, section, .section-title {
+    /* ... */
+}
+
+/* Header */
+header, .header-container, .logo, .nav-menu, .hamburger {
+    /* ... */
+}
+
+/* Hero Section */
+.hero, .hero-content, .hero-title, .hero-subtitle, .hero-text, 
+.hero-btns, .btn, .hero-img, .terminal-effect {
+    /* ... */
+}
+
+/* About Section */
+.about-content, .about-img, .about-text, .about-info {
+    /* ... */
+}
+
+/* Skills Section */
+.skills-container, .skills-category, .skill-item, 
+.skill-bar, .skill-progress, .skills-grid {
+    /* ... */
+}
+
+/* Experience Section */
+.timeline, .timeline-item, .timeline-dot, .timeline-content {
+    /* ... */
+}
+
+/* Education Section */
+.education-container, .education-card {
+    /* ... */
+}
+
+/* Contact Section */
+.contact-container, .contact-info, .contact-item {
+    /* ... */
+}
+
+/* Footer */
+footer, .footer-container, .footer-col, .social-links {
+    /* ... */
+}
+
+/* Анимации */
+@keyframes float, @keyframes progress-animation {
+    /* ... */
+}
+
+/* Медиа-запросы */
+@media (max-width: 992px) {
+    /* ... */
+}
+
+@media (max-width: 768px) {
+    /* ... */
+}
+
+@media (max-width: 576px) {
+    /* ... */
+}
