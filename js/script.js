@@ -36,9 +36,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form submission
-document.getElementById('contact-form')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Сообщение отправлено! Я свяжусь с вами в ближайшее время.');
-    this.reset();
+// Animation for skill bars
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const skillProgress = entry.target.querySelector('.skill-progress');
+            const width = skillProgress.style.width;
+            skillProgress.style.width = '0';
+            setTimeout(() => {
+                skillProgress.style.width = width;
+            }, 300);
+        }
+    });
+}, { threshold: 0.01 });
+
+document.querySelectorAll('.skill-item').forEach(item => {
+    observer.observe(item);
 });
