@@ -257,6 +257,9 @@ header.scrolled {
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow);
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .about-img img {
@@ -264,6 +267,7 @@ header.scrolled {
     height: auto;
     display: block;
     transition: var(--transition);
+    object-fit: cover;
 }
 
 .about-img:hover img {
@@ -284,31 +288,47 @@ header.scrolled {
 .about-info {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 20px;
     margin-top: 30px;
 }
 
 .info-item {
     display: flex;
-    align-items: center;
+    gap: 15px;
+    align-items: flex-start;
 }
 
-.info-item i {
-    font-size: 1.5rem;
+.info-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.info-icon i {
+    font-size: 1.2rem;
     color: var(--primary);
-    margin-right: 15px;
+}
+
+.info-text {
+    flex: 1;
 }
 
 .info-text h4 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-bottom: 5px;
     color: var(--gray);
+    font-weight: 500;
 }
 
 .info-text p {
     margin: 0;
     font-weight: 500;
     color: var(--dark);
+    font-size: 1.05rem;
 }
 
 /* Skills Section */
@@ -783,6 +803,12 @@ footer {
     .hero-subtitle {
         font-size: 1.5rem;
     }
+    
+    /* About section adjustments */
+    .about-img {
+        max-width: 80%;
+        margin: 0 auto;
+    }
 }
 
 @media (max-width: 576px) {
@@ -808,6 +834,11 @@ footer {
     
     .hero-subtitle {
         font-size: 1.3rem;
+    }
+    
+    /* About section adjustments */
+    .about-info {
+        grid-template-columns: 1fr;
     }
 }
 
