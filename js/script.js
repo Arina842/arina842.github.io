@@ -36,20 +36,35 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Animation for skill bars when they come into view
-const observer = new IntersectionObserver((entries) => {
+// Skills animation with reset on scroll
+const skillsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+        const skillProgress = entry.target.querySelector('.skill-progress');
+        const width = skillProgress.dataset.width;
+        
         if (entry.isIntersecting) {
-            const skillProgress = entry.target.querySelector('.skill-progress');
-            const width = skillProgress.style.width;
+            // Reset before animating
             skillProgress.style.width = '0';
+            skillProgress.style.opacity = '0';
+            
+            // Animate after delay
             setTimeout(() => {
-                skillProgress.style.width = width;
+                skillProgress.style.width = width + '%';
+                skillProgress.style.opacity = '1';
             }, 300);
+        } else {
+            // Reset when out of view
+            skillProgress.style.width = '0';
+            skillProgress.style.opacity = '0';
         }
     });
 }, { threshold: 0.01 });
 
+// Initialize skills animation
 document.querySelectorAll('.skill-item').forEach(item => {
-    observer.observe(item);
+    const progress = item.querySelector('.skill-progress');
+    progress.dataset.width = parseInt(progress.style.width);
+    progress.style.width = '0';
+    progress.style.opacity = '0';
+    skillsObserver.observe(item);
 });
