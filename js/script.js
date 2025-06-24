@@ -1,6 +1,3 @@
-// your code goes here
-// your code goes here
-// your code goes here
 // Mobile Menu Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
