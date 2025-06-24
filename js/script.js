@@ -1,3 +1,6 @@
+// your code goes here
+// your code goes here
+// your code goes here
 // Mobile Menu Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -67,4 +70,64 @@ document.querySelectorAll('.skill-item').forEach(item => {
     progress.style.width = '0';
     progress.style.opacity = '0';
     skillsObserver.observe(item);
+});
+// Анимация контактов при скролле
+const contactObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('animate-in');
+            }, index * 150);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.contact-item').forEach(item => {
+    contactObserver.observe(item);
+});
+
+// Эффект копирования email
+const emailElement = document.querySelector('a[href^="mailto:"]');
+if (emailElement) {
+    emailElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = emailElement.getAttribute('href').replace('mailto:', '');
+        
+        // Создаем уведомление
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = 'Email скопирован!';
+        document.body.appendChild(notification);
+        
+        // Показываем уведомление
+        notification.style.display = 'block';
+        
+        // Копируем email и открываем почту
+        navigator.clipboard.writeText(email).then(() => {
+            setTimeout(() => {
+                notification.remove();
+                window.location.href = `mailto:${email}`;
+            }, 2000);
+        }).catch(() => {
+            notification.textContent = 'Не удалось скопировать email';
+            setTimeout(() => {
+                notification.remove();
+                window.location.href = `mailto:${email}`;
+            }, 2000);
+        });
+    });
+}
+
+// Эффект нажатия на все контакты
+document.querySelectorAll('.contact-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const icon = this.querySelector('.contact-icon');
+        icon.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            icon.style.transform = 'scale(1.1)';
+        }, 100);
+        setTimeout(() => {
+            icon.style.transform = 'scale(1)';
+        }, 200);
+    });
 });
