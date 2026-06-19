@@ -1,3 +1,50 @@
+function pluralizeRu(n, one, few, many) {
+    const mod10 = n % 10;
+    const mod100 = n % 100;
+    if (mod100 >= 11 && mod100 <= 19) return many;
+    if (mod10 === 1) return one;
+    if (mod10 >= 2 && mod10 <= 4) return few;
+    return many;
+}
+
+function formatWorkExperience(startDate) {
+    const now = new Date();
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+
+    if (now.getDate() < startDate.getDate()) {
+        months--;
+    }
+
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    const totalMonths = years * 12 + months;
+    const roundedYears = Math.round((totalMonths / 12) * 2) / 2;
+
+    const intPart = Math.floor(roundedYears);
+    const isHalf = roundedYears % 1 !== 0;
+    const value = isHalf
+        ? `${intPart},5`
+        : String(intPart);
+
+    let label;
+    if (isHalf) {
+        label = intPart >= 5 || intPart === 0 ? 'лет' : 'года';
+    } else {
+        label = pluralizeRu(intPart, 'год', 'года', 'лет');
+    }
+
+    return `${value} ${label}`;
+}
+
+const workExperienceEl = document.getElementById('work-experience');
+if (workExperienceEl) {
+    workExperienceEl.textContent = formatWorkExperience(new Date(2021, 1, 1));
+}
+
 // Mobile Menu Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
