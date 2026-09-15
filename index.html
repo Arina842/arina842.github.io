@@ -18,16 +18,25 @@
     <link rel="stylesheet" href="css/style.css">
     <script>
         (function () {
+            var theme = 'light';
+            var lang = 'ru';
             try {
-                var stored = localStorage.getItem('theme');
-                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                var theme = stored || (prefersDark ? 'dark' : 'light');
-                document.documentElement.setAttribute('data-theme', theme);
-                var lang = localStorage.getItem('lang') || 'ru';
-                if (lang !== 'ru' && lang !== 'en' && lang !== 'zh') lang = 'ru';
-                document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : lang);
-                document.documentElement.setAttribute('data-lang', lang);
+                var storedTheme = localStorage.getItem('theme');
+                if (storedTheme === 'dark' || storedTheme === 'light') {
+                    theme = storedTheme;
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    theme = 'dark';
+                }
             } catch (e) {}
+            try {
+                var storedLang = localStorage.getItem('lang');
+                if (storedLang === 'en' || storedLang === 'zh' || storedLang === 'ru') {
+                    lang = storedLang;
+                }
+            } catch (e) {}
+            document.documentElement.setAttribute('data-theme', theme);
+            document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : lang);
+            document.documentElement.setAttribute('data-lang', lang);
         })();
     </script>
 </head>
