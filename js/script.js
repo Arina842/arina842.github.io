@@ -340,49 +340,52 @@ function printOutput(text) {
 const HOBBY_IDS = ['coffee', 'photo', 'music', 'festivals', 'lilac'];
 
 function rainLilacs() {
-    const count = prefersReducedMotion ? 10 : 42;
+    const count = prefersReducedMotion ? 14 : 56;
     const zh = currentLang === 'zh';
     for (let i = 0; i < count; i += 1) {
         const petal = document.createElement('span');
         petal.className = 'lilac-petal';
         petal.style.left = `${Math.random() * 100}vw`;
-        petal.style.animationDuration = `${4.2 + Math.random() * 3.8}s`;
-        petal.style.animationDelay = `${Math.random() * 1.4}s`;
+        petal.style.animationDuration = `${5.5 + Math.random() * 4.5}s`;
+        petal.style.animationDelay = `${Math.random() * 1.8}s`;
         petal.style.transform = `rotate(${Math.random() * 80}deg)`;
         if (zh) {
             petal.style.background = 'radial-gradient(circle at 30% 30%, #f7d6d0, #c23a2b 70%)';
         }
         document.body.appendChild(petal);
-        setTimeout(() => petal.remove(), 10000);
+        setTimeout(() => petal.remove(), 13000);
     }
 }
 
 function rainCoffee() {
-    const count = prefersReducedMotion ? 12 : 48;
+    const count = prefersReducedMotion ? 16 : 64;
     for (let i = 0; i < count; i += 1) {
         const bean = document.createElement('span');
         bean.className = 'coffee-bean';
         bean.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="12" cy="12" rx="8" ry="10" fill="currentColor"/><path d="M12 3.5c-1.2 2.4-1.4 5-1.4 8.5s.2 6.1 1.4 8.5c1.2-2.4 1.4-5 1.4-8.5S13.2 5.9 12 3.5z" fill="rgba(30,16,8,.45)"/></svg>';
         bean.style.left = `${Math.random() * 100}vw`;
-        bean.style.animationDuration = `${3.6 + Math.random() * 3.2}s`;
-        bean.style.animationDelay = `${Math.random() * 1.1}s`;
+        bean.style.animationDuration = `${5 + Math.random() * 4}s`;
+        bean.style.animationDelay = `${Math.random() * 1.5}s`;
         bean.style.setProperty('--spin', `${180 + Math.random() * 540}deg`);
         bean.style.color = ['#6f4e37', '#5d4037', '#4e342e', '#8d6e63'][i % 4];
         document.body.appendChild(bean);
-        setTimeout(() => bean.remove(), 9000);
+        setTimeout(() => bean.remove(), 12000);
     }
 }
 
 function spawnNotes() {
     const marks = ['♪', '♫', '♩'];
-    for (let i = 0; i < 5; i += 1) {
+    const count = prefersReducedMotion ? 6 : 16;
+    for (let i = 0; i < count; i += 1) {
         const note = document.createElement('span');
         note.className = 'float-note';
         note.textContent = marks[i % marks.length];
-        note.style.left = `${20 + Math.random() * 60}vw`;
-        note.style.top = `${40 + Math.random() * 20}vh`;
+        note.style.left = `${12 + Math.random() * 76}vw`;
+        note.style.top = `${30 + Math.random() * 35}vh`;
+        note.style.fontSize = `${1.3 + Math.random() * 0.5}rem`;
+        note.style.animationDelay = `${Math.random() * 0.6}s`;
         document.body.appendChild(note);
-        setTimeout(() => note.remove(), 1800);
+        setTimeout(() => note.remove(), 2800);
     }
 }
 
@@ -390,7 +393,7 @@ function photoFlash() {
     const flash = document.createElement('div');
     flash.className = 'photo-flash';
     document.body.appendChild(flash);
-    setTimeout(() => flash.remove(), 700);
+    setTimeout(() => flash.remove(), 900);
 }
 
 function festivalBurst() {
@@ -400,28 +403,30 @@ function festivalBurst() {
             ? ['#67e8f9', '#a78bfa', '#fb7185', '#fbbf24', '#34d399', '#60a5fa']
             : ['#e74c3c', '#f1c40f', '#3498db', '#9b59b6', '#2ecc71', '#e67e22'];
 
-    for (let i = 0; i < (prefersReducedMotion ? 8 : 26); i += 1) {
+    const sparkCount = prefersReducedMotion ? 10 : 36;
+    for (let i = 0; i < sparkCount; i += 1) {
         const spark = document.createElement('span');
         spark.className = 'fest-spark';
         spark.style.left = `${8 + Math.random() * 84}vw`;
         spark.style.top = `${18 + Math.random() * 50}vh`;
         spark.style.background = colors[i % colors.length];
-        spark.style.animationDelay = `${Math.random() * 0.5}s`;
+        spark.style.animationDelay = `${Math.random() * 0.7}s`;
         spark.style.setProperty('--rise', `${40 + Math.random() * 80}px`);
         document.body.appendChild(spark);
-        setTimeout(() => spark.remove(), 2600);
+        setTimeout(() => spark.remove(), 3200);
     }
 
-    for (let i = 0; i < (prefersReducedMotion ? 6 : 18); i += 1) {
+    const ticketCount = prefersReducedMotion ? 8 : 28;
+    for (let i = 0; i < ticketCount; i += 1) {
         const ticket = document.createElement('span');
         ticket.className = 'fest-ticket';
         ticket.style.left = `${Math.random() * 100}vw`;
         ticket.style.background = colors[i % colors.length];
-        ticket.style.animationDuration = `${4.2 + Math.random() * 3}s`;
-        ticket.style.animationDelay = `${Math.random() * 0.8}s`;
+        ticket.style.animationDuration = `${5.5 + Math.random() * 4}s`;
+        ticket.style.animationDelay = `${Math.random() * 1.2}s`;
         ticket.style.setProperty('--tilt', `${-40 + Math.random() * 80}deg`);
         document.body.appendChild(ticket);
-        setTimeout(() => ticket.remove(), 9000);
+        setTimeout(() => ticket.remove(), 12000);
     }
 }
 
@@ -602,6 +607,11 @@ function applyLang(lang, persist = true) {
 
     document.querySelectorAll('[data-i18n-title]').forEach((el) => {
         el.setAttribute('title', t(el.dataset.i18nTitle));
+    });
+
+    document.querySelectorAll('[data-i18n-href]').forEach((el) => {
+        const href = t(el.dataset.i18nHref);
+        if (typeof href === 'string' && href) el.setAttribute('href', href);
     });
 
     document.querySelectorAll('[data-i18n-alt]').forEach((el) => {

@@ -656,6 +656,18 @@ header.scrolled {
     font-weight: 500;
 }
 
+html:not([data-theme="dark"]) .about-info .info-text h4 {
+    color: #3d4654;
+}
+
+html:not([data-theme="dark"]) .about-info .info-icon i {
+    color: #1e2a36;
+}
+
+html:not([data-theme="dark"]) .about-info .info-text p {
+    color: #1a222c;
+}
+
 .info-text p {
     margin: 0;
     font-weight: 500;
@@ -1635,6 +1647,23 @@ html[data-lang="zh"] .section-title {
     font-weight: 400;
 }
 
+/* Personal data stays ink-colored, not cinnabar red */
+html[data-lang="zh"] .logo,
+html[data-lang="zh"] .logo:hover,
+html[data-lang="zh"] .hero-title,
+html[data-lang="zh"] .hero-subtitle,
+html[data-lang="zh"] .about-text h3,
+html[data-lang="zh"] .info-text p,
+html[data-lang="zh"] #work-experience,
+html[data-lang="zh"] .contact-text a,
+html[data-lang="zh"] .contact-text a:hover {
+    color: var(--dark);
+}
+
+html[data-lang="zh"] .contact-text a:after {
+    background: var(--accent);
+}
+
 html[data-lang="zh"] .hero-title {
     font-family: 'Ma Shan Zheng', 'Liu Jian Mao Cao', 'Noto Serif SC', serif;
     font-weight: 400;
@@ -1647,6 +1676,16 @@ html[data-lang="zh"] .hero-subtitle {
     font-family: 'Noto Serif SC', serif;
     font-size: clamp(1.1rem, 2vw, 1.5rem);
     letter-spacing: 0.18em;
+}
+
+html[data-lang="zh"] footer .footer-col > h3,
+html[data-lang="zh"] footer .copyright,
+html[data-lang="zh"] footer .copyright span {
+    color: #f6ead0;
+}
+
+html[data-lang="zh"] footer .footer-col > p {
+    color: rgba(246, 234, 208, 0.78);
 }
 
 html[data-lang="zh"] .zh-seal {

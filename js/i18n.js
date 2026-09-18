@@ -103,6 +103,7 @@ const I18N = {
             title: 'Контакты',
             location: 'Локация',
             address: 'Москва, м. Алексеевская',
+            mapsUrl: 'https://yandex.ru/maps/-/CPEQQZk~',
             email: 'Email',
             phone: 'Телефон'
         },
@@ -174,8 +175,8 @@ const I18N = {
             p1: 'My path into IT started with a love of logic puzzles and making new things. I retrained from a design engineer to a software engineer because I wanted to keep growing and build things that change how people work.',
             p2: 'I believe the best code is not just code that works — it is clear, maintainable, and scalable. I pay close attention to architecture, code quality, and testing.',
             location: 'Location',
-            city: 'Moscow',
-            metro: 'Alekseyevskaya metro',
+            city: 'Russia,',
+            metro: 'Moscow',
             spec: 'Focus',
             specValue: 'Software Engineer',
             langs: 'Languages',
@@ -241,7 +242,8 @@ const I18N = {
         contact: {
             title: 'Contact',
             location: 'Location',
-            address: 'Moscow, Alekseyevskaya metro',
+            address: 'Moscow, Russia',
+            mapsUrl: 'https://www.google.com/maps/place/Moscow,+Russia/@55.5761932,36.0659798,8z/data=!3m1!4b1!4m6!3m5!1s0x46b54afc73d4b0c9:0x3d44d6cc5757cf4c!8m2!3d55.7568721!4d37.6150527!16zL20vMDRzd2Q?entry=ttu',
             email: 'Email',
             phone: 'Phone'
         },
@@ -313,8 +315,8 @@ const I18N = {
             p1: '我进入 IT 是因为喜欢逻辑题和把新想法做出来。我从设计工程师转行成为软件工程师，是为了持续成长，并做出能改变工作方式的产品。',
             p2: '我认为最好的代码不只是能跑通，还应当清晰、可维护、可扩展。我特别重视架构、代码质量和测试。',
             location: '地点',
-            city: '莫斯科',
-            metro: '阿列克谢耶夫斯卡亚站',
+            city: '俄罗斯',
+            metro: '莫斯科',
             spec: '方向',
             specValue: '软件工程师',
             langs: '语言',
@@ -380,7 +382,8 @@ const I18N = {
         contact: {
             title: '联系方式',
             location: '地点',
-            address: '莫斯科，阿列克谢耶夫斯卡亚站',
+            address: '莫斯科，俄罗斯',
+            mapsUrl: 'https://www.google.com/maps/place/Moscow,+Russia/@55.5761932,36.0659798,8z/data=!3m1!4b1!4m6!3m5!1s0x46b54afc73d4b0c9:0x3d44d6cc5757cf4c!8m2!3d55.7568721!4d37.6150527!16zL20vMDRzd2Q?entry=ttu',
             email: '邮箱',
             phone: '电话'
         },
