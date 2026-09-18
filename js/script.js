@@ -143,6 +143,7 @@ const navMenu = document.querySelector('.nav-menu');
 
 function setMenuOpen(open) {
     navMenu.classList.toggle('active', open);
+    document.body.classList.toggle('nav-open', open);
     hamburger.setAttribute('aria-expanded', String(open));
     hamburger.setAttribute('aria-label', open ? t('menu.close') : t('menu.open'));
     hamburger.innerHTML = open
@@ -162,6 +163,14 @@ if (hamburger && navMenu) {
     document.querySelectorAll('.nav-menu a').forEach((link) => {
         link.addEventListener('click', closeMenu);
     });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) closeMenu();
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navMenu.classList.contains('active')) closeMenu();
+    }, { passive: true });
 }
 
 window.addEventListener('scroll', () => {
@@ -339,8 +348,16 @@ function printOutput(text) {
 
 const HOBBY_IDS = ['coffee', 'photo', 'music', 'festivals', 'lilac'];
 
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches
+    || window.matchMedia('(hover: none)').matches;
+
+function effectCount(desktop, mobile, reduced) {
+    if (prefersReducedMotion) return reduced;
+    return isCoarsePointer ? mobile : desktop;
+}
+
 function rainLilacs() {
-    const count = prefersReducedMotion ? 14 : 56;
+    const count = effectCount(56, 28, 12);
     const zh = currentLang === 'zh';
     for (let i = 0; i < count; i += 1) {
         const petal = document.createElement('span');
@@ -358,7 +375,7 @@ function rainLilacs() {
 }
 
 function rainCoffee() {
-    const count = prefersReducedMotion ? 16 : 64;
+    const count = effectCount(64, 32, 14);
     for (let i = 0; i < count; i += 1) {
         const bean = document.createElement('span');
         bean.className = 'coffee-bean';
@@ -375,7 +392,7 @@ function rainCoffee() {
 
 function spawnNotes() {
     const marks = ['♪', '♫', '♩'];
-    const count = prefersReducedMotion ? 6 : 16;
+    const count = effectCount(16, 10, 6);
     for (let i = 0; i < count; i += 1) {
         const note = document.createElement('span');
         note.className = 'float-note';
@@ -403,7 +420,7 @@ function festivalBurst() {
             ? ['#67e8f9', '#a78bfa', '#fb7185', '#fbbf24', '#34d399', '#60a5fa']
             : ['#e74c3c', '#f1c40f', '#3498db', '#9b59b6', '#2ecc71', '#e67e22'];
 
-    const sparkCount = prefersReducedMotion ? 10 : 36;
+    const sparkCount = effectCount(36, 18, 8);
     for (let i = 0; i < sparkCount; i += 1) {
         const spark = document.createElement('span');
         spark.className = 'fest-spark';
@@ -416,7 +433,7 @@ function festivalBurst() {
         setTimeout(() => spark.remove(), 3200);
     }
 
-    const ticketCount = prefersReducedMotion ? 8 : 28;
+    const ticketCount = effectCount(28, 14, 6);
     for (let i = 0; i < ticketCount; i += 1) {
         const ticket = document.createElement('span');
         ticket.className = 'fest-ticket';
@@ -471,9 +488,12 @@ function renderHobbies() {
         btn.type = 'button';
         btn.className = id === 'lilac' ? 'hobby-chip is-secret' : 'hobby-chip';
         btn.dataset.hobby = id;
+        btn.setAttribute('aria-label', t(`terminal.hobbies.${id}`));
         btn.textContent = t(`terminal.hobbies.${id}`);
         btn.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
+            if (document.activeElement === terminalInput) terminalInput.blur();
             triggerHobby(id);
         });
         wrap.appendChild(btn);
@@ -512,9 +532,16 @@ if (terminalForm && terminalInput && terminalBody) {
     terminalForm.addEventListener('submit', (e) => {
         e.preventDefault();
         runLilacCommand(terminalInput.value);
+        if (isCoarsePointer) terminalInput.blur();
     });
     document.getElementById('terminal')?.addEventListener('click', (e) => {
         if (e.target.closest('.hobby-chip')) return;
+        if (e.target === terminalInput || e.target.closest('label[for="terminal-input"]')) {
+            terminalInput.focus();
+            return;
+        }
+        /* On phones, auto-focus opens the keyboard and breaks chip taps */
+        if (isCoarsePointer) return;
         terminalInput.focus();
     });
 }
@@ -530,10 +557,16 @@ document.querySelector('.logo')?.addEventListener('click', () => {
 
 /* Motion extras */
 const pointerGlow = document.querySelector('.pointer-glow');
-if (pointerGlow && !prefersReducedMotion) {
+if (
+    pointerGlow
+    && !prefersReducedMotion
+    && window.matchMedia('(hover: hover) and (pointer: fine)').matches
+) {
     window.addEventListener('pointermove', (e) => {
         pointerGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     }, { passive: true });
+} else if (pointerGlow) {
+    pointerGlow.style.display = 'none';
 }
 
 const heroImg = document.querySelector('.hero-img');

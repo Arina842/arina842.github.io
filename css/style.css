@@ -519,9 +519,13 @@ header.scrolled {
     color: #f0f0f0;
     font-family: inherit;
     font-size: 0.82rem;
-    padding: 4px 10px;
+    padding: 8px 12px;
+    min-height: 40px;
     border-radius: 999px;
     cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
     transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -530,6 +534,11 @@ header.scrolled {
     transform: translateY(-2px);
     background: rgba(201, 168, 224, 0.22);
     border-color: #c9a8e0;
+}
+
+.hobby-chip:active {
+    transform: scale(0.97);
+    background: rgba(201, 168, 224, 0.28);
 }
 
 .hobby-chip.is-secret {
@@ -1923,18 +1932,62 @@ html[data-lang="zh"] .nav-menu a {
 }
 
 @media (max-width: 768px) {
+    body.nav-open {
+        overflow: hidden;
+    }
+
+    section {
+        padding: 56px 0;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 40px;
+    }
+
+    .header-container {
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+        max-width: 42vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .header-actions {
+        gap: 6px;
+    }
+
+    .lang-switch button {
+        padding: 6px 7px;
+        font-size: 0.68rem;
+        min-height: 36px;
+    }
+
+    .theme-toggle,
+    .hamburger {
+        width: 40px;
+        height: 40px;
+    }
+
     .nav-menu {
         position: fixed;
         top: 70px;
         right: -100%;
-        width: 70%;
-        height: calc(100vh - 70px);
+        width: min(80%, 320px);
+        height: calc(100dvh - 70px);
         background: var(--surface);
         flex-direction: column;
         align-items: center;
-        padding-top: 40px;
+        padding: 40px 20px 32px;
         transition: var(--transition);
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav-menu.active {
@@ -1942,24 +1995,24 @@ html[data-lang="zh"] .nav-menu a {
     }
 
     .nav-menu li {
-        margin: 15px 0;
+        margin: 12px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 10px 12px;
+        font-size: 1.05rem;
     }
 
     .hamburger {
         display: inline-flex;
     }
 
-    .logo {
-        font-size: 1.35rem;
-    }
-
-    .lang-switch button {
-        padding: 5px 6px;
-        font-size: 0.68rem;
-    }
-
     .hero {
-        padding-top: 120px;
+        padding-top: 100px;
+        padding-bottom: 40px;
         text-align: center;
         min-height: auto;
     }
@@ -1970,24 +2023,110 @@ html[data-lang="zh"] .nav-menu a {
 
     .hero-img-container {
         max-width: 100%;
-        margin-top: 40px;
+        margin-top: 28px;
     }
 
     .hero-title,
     html[data-lang="en"] .hero-title,
     html[data-lang="zh"] .hero-title {
-        font-size: 2.3rem;
+        font-size: clamp(1.55rem, 7vw, 2.2rem);
+        word-break: break-word;
     }
 
-    .terminal-effect,
-    .terminal-input-line {
+    .hero-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 18px;
+    }
+
+    .hero-text {
+        font-size: 1.05rem;
+        margin-bottom: 28px;
+    }
+
+    .terminal-effect {
+        margin-top: 24px;
+        padding: 14px;
         text-align: left;
+        overflow: hidden;
+    }
+
+    .terminal-body {
+        font-size: 0.88rem;
+        line-height: 1.65;
+        word-break: break-word;
+    }
+
+    .terminal-title {
+        font-size: 0.78rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .terminal-input-line {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 4px 8px;
+        font-size: 0.88rem;
+        text-align: left;
+    }
+
+    .terminal-input-line .prompt {
+        flex: 0 1 auto;
+        max-width: 100%;
+        font-size: 0.78rem;
+        word-break: break-all;
+    }
+
+    .terminal-input-line input {
+        width: 100%;
+        flex: 1 1 100%;
+        min-height: 36px;
+        font-size: 16px; /* prevent iOS zoom on focus */
+    }
+
+    .hobby-row {
+        gap: 8px;
+        margin: 10px 0 14px;
+    }
+
+    .hobby-chip {
+        font-size: 0.8rem;
+        padding: 10px 14px;
+        min-height: 44px;
+    }
+
+    .timeline-content {
+        padding: 18px;
+    }
+
+    .notification {
+        max-width: calc(100vw - 32px);
+        left: 50%;
+        bottom: max(16px, env(safe-area-inset-bottom));
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .back-to-top {
+        right: max(14px, env(safe-area-inset-right));
+        bottom: max(14px, env(safe-area-inset-bottom));
+    }
+
+    .pointer-glow {
+        display: none !important;
     }
 }
 
 @media (max-width: 576px) {
+    .container {
+        width: 94%;
+        padding: 0 10px;
+    }
+
     .footer-container {
         grid-template-columns: 1fr;
+        gap: 28px;
     }
 
     .info-item {
@@ -1996,12 +2135,17 @@ html[data-lang="zh"] .nav-menu a {
 
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .skill-item {
+        padding: 14px 10px;
     }
 
     .hero-title,
     html[data-lang="en"] .hero-title,
     html[data-lang="zh"] .hero-title {
-        font-size: 2rem;
+        font-size: clamp(1.4rem, 8vw, 1.9rem);
     }
 
     .about-info {
@@ -2016,9 +2160,41 @@ html[data-lang="zh"] .nav-menu a {
     .btn {
         width: 100%;
     }
+
+    .hero-img-container {
+        max-width: 92%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-img {
+        max-width: 92%;
+    }
+
+    .contact-item {
+        padding: 18px 14px;
+    }
 }
 
-    @media (prefers-reduced-motion: reduce) {
+@media (hover: none) and (pointer: coarse) {
+    .pointer-glow {
+        display: none !important;
+    }
+
+    .hobby-chip:hover {
+        transform: none;
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .hobby-chip:active {
+        transform: scale(0.97);
+        background: rgba(201, 168, 224, 0.28);
+        border-color: #c9a8e0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
     }
