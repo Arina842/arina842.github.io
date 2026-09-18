@@ -1147,21 +1147,42 @@ html[data-lang="zh"] .job-duration-tip::after {
 
 @media (hover: none) and (pointer: coarse) {
     .timeline-content {
-        cursor: default;
+        cursor: pointer;
     }
 
     .job-duration-tip {
         position: static;
         width: auto;
-        margin-top: 16px;
-        opacity: 1;
-        visibility: visible;
+        max-height: 0;
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        opacity: 0;
+        visibility: hidden;
         transform: none;
-        pointer-events: auto;
+        pointer-events: none;
         box-shadow: none;
+        border-color: transparent;
+        overflow: hidden;
+        transition: opacity 0.25s ease, max-height 0.25s ease, margin 0.25s ease, padding 0.25s ease, visibility 0.25s ease;
     }
 
-    .job-duration-tip::before {
+    .timeline-content.is-duration-open .job-duration-tip {
+        max-height: 220px;
+        margin-top: 16px;
+        padding: 16px 18px 18px;
+        opacity: 1;
+        visibility: visible;
+        border-color: rgba(44, 62, 80, 0.1);
+        pointer-events: auto;
+    }
+
+    [data-theme="dark"] .timeline-content.is-duration-open .job-duration-tip {
+        border-color: color-mix(in srgb, var(--primary) 32%, transparent);
+    }
+
+    .job-duration-tip::before,
+    .job-duration-tip::after {
         display: none;
     }
 

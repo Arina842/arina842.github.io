@@ -143,6 +143,46 @@ function updateJobDurationTips() {
     });
 }
 
+function isTouchUi() {
+    return window.matchMedia('(hover: none)').matches
+        || window.matchMedia('(pointer: coarse)').matches;
+}
+
+function closeJobDurationTips(except = null) {
+    document.querySelectorAll('.timeline-content.is-duration-open').forEach((card) => {
+        if (card === except) return;
+        card.classList.remove('is-duration-open');
+        card.setAttribute('aria-expanded', 'false');
+    });
+}
+
+function initJobDurationInteractions() {
+    const timeline = document.querySelector('.timeline');
+    if (!timeline || timeline.dataset.durationBound === '1') return;
+    timeline.dataset.durationBound = '1';
+
+    document.querySelectorAll('.timeline-content[data-start]').forEach((card) => {
+        card.setAttribute('aria-expanded', 'false');
+    });
+
+    timeline.addEventListener('click', (e) => {
+        if (!isTouchUi()) return;
+        const card = e.target.closest('.timeline-content[data-start]');
+        if (!card || !timeline.contains(card)) return;
+
+        const willOpen = !card.classList.contains('is-duration-open');
+        closeJobDurationTips(willOpen ? card : null);
+        card.classList.toggle('is-duration-open', willOpen);
+        card.setAttribute('aria-expanded', String(willOpen));
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!isTouchUi()) return;
+        if (e.target.closest('.timeline-content[data-start]')) return;
+        closeJobDurationTips();
+    });
+}
+
 const yearEl = document.getElementById('year');
 if (yearEl) {
     yearEl.textContent = String(new Date().getFullYear());
@@ -745,6 +785,7 @@ function applyLang(lang, persist = true) {
 
     updateWorkExperience();
     updateJobDurationTips();
+    initJobDurationInteractions();
     applyTheme(currentTheme(), false);
     if (hamburger) {
         const open = navMenu.classList.contains('active');
