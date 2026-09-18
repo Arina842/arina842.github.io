@@ -63,6 +63,86 @@ function updateWorkExperience() {
     }
 }
 
+/* Inclusive month span: Nov–Dec = 2 months */
+function parseYearMonth(value) {
+    if (!value || value === 'present') {
+        const now = new Date();
+        return { year: now.getFullYear(), month: now.getMonth() + 1 };
+    }
+    const [yearStr, monthStr] = value.split('-');
+    return { year: Number(yearStr), month: Number(monthStr) };
+}
+
+function inclusiveMonths(startValue, endValue) {
+    const start = parseYearMonth(startValue);
+    const end = parseYearMonth(endValue);
+    return (end.year - start.year) * 12 + (end.month - start.month) + 1;
+}
+
+function formatUnitParts(n, one, few, many) {
+    if (currentLang === 'zh') {
+        return { num: String(n), unit: one };
+    }
+    if (currentLang === 'en') {
+        return { num: String(n), unit: n === 1 ? one : many };
+    }
+    return { num: String(n), unit: pluralizeRu(n, one, few, many) };
+}
+
+function buildDurationParts(totalMonths) {
+    if (totalMonths < 1) totalMonths = 1;
+    const years = Math.floor(totalMonths / 12);
+    const months = totalMonths % 12;
+    const parts = [];
+
+    if (years > 0) {
+        parts.push({
+            ...formatUnitParts(years, t('ui.yearsOne'), t('ui.yearsFew'), t('ui.yearsMany')),
+            kind: 'years'
+        });
+    }
+    if (months > 0 || years === 0) {
+        const m = years === 0 ? totalMonths : months;
+        parts.push({
+            ...formatUnitParts(m, t('ui.monthsOne'), t('ui.monthsFew'), t('ui.monthsMany')),
+            kind: 'months'
+        });
+    }
+    return parts;
+}
+
+function updateJobDurationTips() {
+    document.querySelectorAll('.timeline-content[data-start]').forEach((card, index) => {
+        const totalMonths = inclusiveMonths(card.dataset.start, card.dataset.end);
+        const parts = buildDurationParts(totalMonths);
+        const tipId = `job-duration-${index}`;
+        let tip = card.querySelector('.job-duration-tip');
+        if (!tip) {
+            tip = document.createElement('aside');
+            tip.className = 'job-duration-tip';
+            tip.id = tipId;
+            card.appendChild(tip);
+            card.setAttribute('aria-describedby', tipId);
+        }
+
+        const partsHtml = parts.map((part) => `
+            <span class="job-duration-part job-duration-part--${part.kind}">
+                <span class="job-duration-num">${part.num}</span>
+                <span class="job-duration-unit">${part.unit}</span>
+            </span>
+        `).join('');
+
+        tip.innerHTML = `
+            <div class="job-duration-glow" aria-hidden="true"></div>
+            <div class="job-duration-head">
+                <span class="job-duration-mark" aria-hidden="true"></span>
+                <span class="job-duration-label">${t('ui.durationLabel')}</span>
+            </div>
+            <div class="job-duration-value">${partsHtml}</div>
+        `;
+    });
+}
+
 const yearEl = document.getElementById('year');
 if (yearEl) {
     yearEl.textContent = String(new Date().getFullYear());
@@ -186,7 +266,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         if (!target) return;
         e.preventDefault();
         window.scrollTo({
-            top: target.offsetTop - 70,
+            top: target.offsetTop - 72,
             behavior: prefersReducedMotion ? 'auto' : 'smooth'
         });
     });
@@ -664,6 +744,7 @@ function applyLang(lang, persist = true) {
     });
 
     updateWorkExperience();
+    updateJobDurationTips();
     applyTheme(currentTheme(), false);
     if (hamburger) {
         const open = navMenu.classList.contains('active');

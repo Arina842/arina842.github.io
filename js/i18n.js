@@ -119,7 +119,11 @@ const I18N = {
             emailOpen: 'Открываю почту…',
             yearsOne: 'год',
             yearsFew: 'года',
-            yearsMany: 'лет'
+            yearsMany: 'лет',
+            monthsOne: 'месяц',
+            monthsFew: 'месяца',
+            monthsMany: 'месяцев',
+            durationLabel: 'Срок работы'
         },
         terminal: {
             whoami: 'Гаврилович Арина · инженер-программист',
@@ -259,7 +263,11 @@ const I18N = {
             emailOpen: 'Opening mail…',
             yearsOne: 'year',
             yearsFew: 'years',
-            yearsMany: 'years'
+            yearsMany: 'years',
+            monthsOne: 'month',
+            monthsFew: 'months',
+            monthsMany: 'months',
+            durationLabel: 'Time in role'
         },
         terminal: {
             whoami: 'Arina Gavrilovich · software engineer',
@@ -399,7 +407,11 @@ const I18N = {
             emailOpen: '正在打开邮箱…',
             yearsOne: '年',
             yearsFew: '年',
-            yearsMany: '年'
+            yearsMany: '年',
+            monthsOne: '个月',
+            monthsFew: '个月',
+            monthsMany: '个月',
+            durationLabel: '任职时长'
         },
         terminal: {
             whoami: '阿丽娜·加夫里洛维奇 · 软件工程师',
