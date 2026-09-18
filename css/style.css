@@ -1525,29 +1525,52 @@ footer {
     color: var(--btn-text);
 }
 
-.lilac-petal {
+#fx-layer {
     position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2000;
+    overflow: visible;
+}
+
+#fx-layer .lilac-petal,
+#fx-layer .coffee-bean,
+#fx-layer .fest-ticket,
+#fx-layer .fest-spark,
+#fx-layer .float-note,
+#fx-layer .photo-flash {
+    position: absolute;
+}
+
+.lilac-petal {
     top: -24px;
     width: 14px;
     height: 20px;
     background: radial-gradient(circle at 30% 30%, #f3d9f3, #b794d1 70%);
     border-radius: 70% 30% 70% 30%;
     pointer-events: none;
-    z-index: 1200;
+    z-index: 1;
+    --rot: 0deg;
+    transform: translate3d(0, 0, 0) rotate(var(--rot));
     animation: fall linear forwards;
     opacity: 0.9;
+    will-change: transform, opacity;
 }
 
 .coffee-bean {
-    position: fixed;
     top: -28px;
     width: 18px;
     height: 22px;
     color: #6f4e37;
     pointer-events: none;
-    z-index: 1200;
+    z-index: 1;
+    --spin: 360deg;
+    transform: translate3d(0, 0, 0) rotate(0deg);
     animation: coffee-fall linear forwards;
     opacity: 0.95;
+    will-change: transform, opacity;
 }
 
 .coffee-bean svg {
@@ -1558,27 +1581,29 @@ footer {
 }
 
 .fest-spark {
-    position: fixed;
     width: 10px;
     height: 10px;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 1200;
+    z-index: 1;
     box-shadow: 0 0 14px currentColor, 0 0 28px rgba(255, 255, 255, 0.35);
     animation: fest-pop 2.2s ease-out forwards;
+    will-change: transform, opacity;
 }
 
 .fest-ticket {
-    position: fixed;
     top: -40px;
     width: 18px;
     height: 26px;
     border-radius: 2px;
     pointer-events: none;
-    z-index: 1200;
+    z-index: 1;
+    --tilt: 25deg;
+    transform: translate3d(0, 0, 0) rotate(var(--tilt));
     animation: fest-paper linear forwards;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
     opacity: 0.95;
+    will-change: transform, opacity;
 }
 
 .pointer-glow {
@@ -1611,20 +1636,19 @@ footer {
 }
 
 .photo-flash {
-    position: fixed;
     inset: 0;
     background: rgba(255, 255, 255, 0.55);
     pointer-events: none;
-    z-index: 1300;
+    z-index: 2;
     animation: flash 0.45s ease-out forwards;
 }
 
 .float-note {
-    position: fixed;
     font-size: 1.6rem;
     pointer-events: none;
-    z-index: 1200;
+    z-index: 1;
     animation: rise-fade 1.1s ease-out forwards;
+    color: var(--primary);
 }
 
 @keyframes pulse-lilac {
@@ -1664,22 +1688,34 @@ footer {
 }
 
 @keyframes fall {
+    from {
+        transform: translate3d(0, 0, 0) rotate(var(--rot));
+        opacity: 0.95;
+    }
     to {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translate3d(0, 110vh, 0) rotate(calc(var(--rot) + 360deg));
         opacity: 0;
     }
 }
 
 @keyframes coffee-fall {
+    from {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+        opacity: 0.95;
+    }
     to {
-        transform: translateY(110vh) rotate(var(--spin, 360deg));
+        transform: translate3d(0, 110vh, 0) rotate(var(--spin, 360deg));
         opacity: 0.2;
     }
 }
 
 @keyframes fest-paper {
+    from {
+        transform: translate3d(0, 0, 0) rotate(var(--tilt, 25deg));
+        opacity: 0.95;
+    }
     to {
-        transform: translateY(110vh) rotate(var(--tilt, 25deg));
+        transform: translate3d(0, 110vh, 0) rotate(calc(var(--tilt, 25deg) + 40deg));
         opacity: 0.25;
     }
 }
@@ -2521,9 +2557,9 @@ html[data-lang="zh"] .nav-menu a {
         scroll-behavior: auto;
     }
 
-    *,
-    *::before,
-    *::after {
+    *:not(.lilac-petal):not(.coffee-bean):not(.fest-ticket):not(.fest-spark):not(.float-note):not(.photo-flash):not(.notification),
+    *:not(.lilac-petal):not(.coffee-bean):not(.fest-ticket):not(.fest-spark):not(.float-note):not(.photo-flash):not(.notification)::before,
+    *:not(.lilac-petal):not(.coffee-bean):not(.fest-ticket):not(.fest-spark):not(.float-note):not(.photo-flash):not(.notification)::after {
         animation: none !important;
         transition: none !important;
     }
@@ -2535,5 +2571,12 @@ html[data-lang="zh"] .nav-menu a {
     .reveal {
         opacity: 1;
         transform: none;
+    }
+
+    .lilac-petal,
+    .coffee-bean,
+    .fest-ticket {
+        animation-duration: 4.5s !important;
+        animation-delay: 0s !important;
     }
 }

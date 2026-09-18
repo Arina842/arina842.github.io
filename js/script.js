@@ -476,26 +476,39 @@ function effectCount(desktop, mobile, reduced) {
     return isCoarsePointer ? mobile : desktop;
 }
 
+function getFxLayer() {
+    let layer = document.getElementById('fx-layer');
+    if (!layer) {
+        layer = document.createElement('div');
+        layer.id = 'fx-layer';
+        layer.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(layer);
+    }
+    return layer;
+}
+
 function rainLilacs() {
     const count = effectCount(56, 28, 12);
     const zh = currentLang === 'zh';
+    const layer = getFxLayer();
     for (let i = 0; i < count; i += 1) {
         const petal = document.createElement('span');
         petal.className = 'lilac-petal';
         petal.style.left = `${Math.random() * 100}vw`;
         petal.style.animationDuration = `${5.5 + Math.random() * 4.5}s`;
         petal.style.animationDelay = `${Math.random() * 1.8}s`;
-        petal.style.transform = `rotate(${Math.random() * 80}deg)`;
+        petal.style.setProperty('--rot', `${Math.random() * 80}deg`);
         if (zh) {
             petal.style.background = 'radial-gradient(circle at 30% 30%, #f7d6d0, #c23a2b 70%)';
         }
-        document.body.appendChild(petal);
+        layer.appendChild(petal);
         setTimeout(() => petal.remove(), 13000);
     }
 }
 
 function rainCoffee() {
     const count = effectCount(64, 32, 14);
+    const layer = getFxLayer();
     for (let i = 0; i < count; i += 1) {
         const bean = document.createElement('span');
         bean.className = 'coffee-bean';
@@ -505,7 +518,7 @@ function rainCoffee() {
         bean.style.animationDelay = `${Math.random() * 1.5}s`;
         bean.style.setProperty('--spin', `${180 + Math.random() * 540}deg`);
         bean.style.color = ['#6f4e37', '#5d4037', '#4e342e', '#8d6e63'][i % 4];
-        document.body.appendChild(bean);
+        layer.appendChild(bean);
         setTimeout(() => bean.remove(), 12000);
     }
 }
@@ -513,6 +526,7 @@ function rainCoffee() {
 function spawnNotes() {
     const marks = ['♪', '♫', '♩'];
     const count = effectCount(16, 10, 6);
+    const layer = getFxLayer();
     for (let i = 0; i < count; i += 1) {
         const note = document.createElement('span');
         note.className = 'float-note';
@@ -521,7 +535,7 @@ function spawnNotes() {
         note.style.top = `${30 + Math.random() * 35}vh`;
         note.style.fontSize = `${1.3 + Math.random() * 0.5}rem`;
         note.style.animationDelay = `${Math.random() * 0.6}s`;
-        document.body.appendChild(note);
+        layer.appendChild(note);
         setTimeout(() => note.remove(), 2800);
     }
 }
@@ -529,7 +543,7 @@ function spawnNotes() {
 function photoFlash() {
     const flash = document.createElement('div');
     flash.className = 'photo-flash';
-    document.body.appendChild(flash);
+    getFxLayer().appendChild(flash);
     setTimeout(() => flash.remove(), 900);
 }
 
@@ -540,6 +554,7 @@ function festivalBurst() {
             ? ['#67e8f9', '#a78bfa', '#fb7185', '#fbbf24', '#34d399', '#60a5fa']
             : ['#e74c3c', '#f1c40f', '#3498db', '#9b59b6', '#2ecc71', '#e67e22'];
 
+    const layer = getFxLayer();
     const sparkCount = effectCount(36, 18, 8);
     for (let i = 0; i < sparkCount; i += 1) {
         const spark = document.createElement('span');
@@ -549,7 +564,7 @@ function festivalBurst() {
         spark.style.background = colors[i % colors.length];
         spark.style.animationDelay = `${Math.random() * 0.7}s`;
         spark.style.setProperty('--rise', `${40 + Math.random() * 80}px`);
-        document.body.appendChild(spark);
+        layer.appendChild(spark);
         setTimeout(() => spark.remove(), 3200);
     }
 
@@ -562,7 +577,7 @@ function festivalBurst() {
         ticket.style.animationDuration = `${5.5 + Math.random() * 4}s`;
         ticket.style.animationDelay = `${Math.random() * 1.2}s`;
         ticket.style.setProperty('--tilt', `${-40 + Math.random() * 80}deg`);
-        document.body.appendChild(ticket);
+        layer.appendChild(ticket);
         setTimeout(() => ticket.remove(), 12000);
     }
 }
